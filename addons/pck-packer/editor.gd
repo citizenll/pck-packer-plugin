@@ -256,16 +256,27 @@ func _on_New_pressed():
 
 
 func _export_pack_item(pack_item):
-	var export_name = pack_item.export_pck_name
 	var files = pack_item.files
 	var command = _get_command()
 	var platform = check_preset(files)
-	var arguments = _get_arguments(platform, export_name)
+	var arguments = _get_arguments(platform, pack_item)
 	var output = []
-	print("export:", [command, arguments, platform, export_name])
 	var err = OS.execute(command, arguments, false , output)
-	print("执行结果:",err,  output)
-
+	var export_name = pack_item.export_pck_name
+	var export_path = pack_item.export_pck_path
+	var export_suffix = pack_item.export_pck_suffix
+	
+	var dist = get_project_path()
+	if export_path:
+		dist = export_path
+	else:
+		dist.plus_file("dist")
+	var dist_dir = dist
+	var from = dist.plus_file("%s.%s" % [export_name, "pck"])
+	var to = dist_dir.plus_file("%s.%s" % [export_name, export_suffix])
+	var dir = Directory.new()
+	yield(get_tree().create_timer(5), "timeout")
+	dir.rename(from, to)
 
 func _remove_pack_item(pack_item):
 	tree_item_list.remove_child(pack_item)
@@ -289,6 +300,7 @@ func check_preset(files):
 	preset.save("res://export_presets.cfg")
 	var dir = Directory.new()
 	var dist_dir = "res://dist"
+	
 	if not dir.dir_exists(dist_dir):
 		dir.make_dir(dist_dir)
 	return default_platform
@@ -298,12 +310,23 @@ func _get_command() -> String:
 	return OS.get_executable_path()
 
 
-func _get_arguments(platform,  pck_name) -> PoolStringArray:
+func _get_arguments(platform,  pack_item) -> PoolStringArray:
+	var export_name = pack_item.export_pck_name
+	var export_path = pack_item.export_pck_path
+	var export_suffix = pack_item.export_pck_suffix
+	print("arg:", [export_name, export_path, export_suffix])
+	
 	var ret: PoolStringArray
 	ret.append("--no-window")
 	ret.append("--export-pack")
 	ret.append(platform)
 	
-	var dist = get_project_path().plus_file("/dist/%s.pck" % pck_name)
+	var dist = get_project_path()
+	if export_path:
+		dist = export_path
+	else:
+		dist.plus_file("dist")
+	var file_name = "%s.%s" % [export_name, 'pck']
+	dist = dist.plus_file(file_name)
 	ret.append(dist)
 	return ret

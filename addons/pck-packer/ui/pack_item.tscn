@@ -1,30 +1,31 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://addons/pck_packer/ui/pack_item.gd" type="Script" id=1]
 [ext_resource path="res://addons/pck_packer/tool_button.gd" type="Script" id=2]
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.129412, 0.129412, 0.129412, 1 )
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color( 0.0980392, 0.0980392, 0.0980392, 1 )
-border_blend = true
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.2, 0.2, 0.2, 1 )
+
+[sub_resource type="Image" id=6]
+data = {
+"data": PoolByteArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
+"format": "LumAlpha8",
+"height": 16,
+"mipmaps": false,
+"width": 16
+}
+
+[sub_resource type="ImageTexture" id=5]
+flags = 4
+flags = 4
+image = SubResource( 6 )
+size = Vector2( 16, 16 )
 
 [node name="PackItem" type="Panel"]
 margin_right = 400.0
 margin_bottom = 251.0
 rect_min_size = Vector2( 600, 400 )
 focus_mode = 2
-custom_styles/panel = SubResource( 1 )
 script = ExtResource( 1 )
 
 [node name="Border" type="ReferenceRect" parent="."]
@@ -56,20 +57,21 @@ margin_right = 595.0
 margin_bottom = 395.0
 size_flags_horizontal = 3
 
-[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer"]
+[node name="ToolPanel" type="Panel" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 margin_right = 590.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 0, 50 )
 custom_styles/panel = SubResource( 3 )
 
-[node name="TitleLabel" type="Label" parent="MarginContainer/VBoxContainer/Panel"]
+[node name="TitleLabel" type="Label" parent="MarginContainer/VBoxContainer/ToolPanel"]
 unique_name_in_owner = true
 anchor_bottom = 1.0
 margin_left = 10.0
 text = "PackItemNameHere"
 valign = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Panel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ToolPanel"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -80,24 +82,26 @@ margin_right = -7.0
 margin_bottom = 20.0
 alignment = 2
 
-[node name="DelButton" type="Button" parent="MarginContainer/VBoxContainer/Panel/HBoxContainer"]
+[node name="DelButton" type="Button" parent="MarginContainer/VBoxContainer/ToolPanel/HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 124.0
-margin_right = 179.0
+margin_left = 88.0
+margin_right = 161.0
 margin_bottom = 40.0
 grow_horizontal = 0
 text = "Delete"
+icon = SubResource( 5 )
 flat = true
 script = ExtResource( 2 )
 icon_name = "Remove"
 
-[node name="ExportButton" type="Button" parent="MarginContainer/VBoxContainer/Panel/HBoxContainer"]
+[node name="ExportButton" type="Button" parent="MarginContainer/VBoxContainer/ToolPanel/HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 183.0
+margin_left = 165.0
 margin_right = 235.0
 margin_bottom = 40.0
 grow_horizontal = 0
 text = "Export"
+icon = SubResource( 5 )
 flat = true
 script = ExtResource( 2 )
 icon_name = "Play"
@@ -120,22 +124,69 @@ stretch_mode = 6
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/NameHBoxContainer"]
 margin_left = 4.0
 margin_top = 5.0
-margin_right = 96.0
+margin_right = 100.0
 margin_bottom = 19.0
-text = "Sub-pck Name"
+text = "Sub-pck Name:"
 
-[node name="FileNameLineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/VBoxContainer/NameHBoxContainer"]
-unique_name_in_owner = true
-margin_left = 100.0
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer/NameHBoxContainer"]
+margin_left = 104.0
 margin_right = 590.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="FileNameLineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/VBoxContainer/NameHBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+margin_right = 364.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 placeholder_text = "As export file name."
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/NameHBoxContainer/HBoxContainer"]
+margin_left = 368.0
+margin_top = 5.0
+margin_right = 372.0
+margin_bottom = 19.0
+text = "."
+
+[node name="FileSuffixNameLineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/VBoxContainer/NameHBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 376.0
+margin_right = 486.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+text = "pck"
+placeholder_text = ".pck"
+
+[node name="DistHBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
 margin_top = 28.0
 margin_right = 590.0
-margin_bottom = 42.0
+margin_bottom = 52.0
+
+[node name="DistIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/VBoxContainer/DistHBoxContainer"]
+unique_name_in_owner = true
+margin_bottom = 24.0
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/DistHBoxContainer"]
+margin_left = 4.0
+margin_top = 5.0
+margin_right = 66.0
+margin_bottom = 19.0
+text = "Dist Path:"
+
+[node name="FileDistLineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/VBoxContainer/DistHBoxContainer"]
+unique_name_in_owner = true
+margin_left = 70.0
+margin_right = 590.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+placeholder_text = "Export file path."
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+margin_top = 56.0
+margin_right = 590.0
+margin_bottom = 70.0
 
 [node name="FileListIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
@@ -149,7 +200,7 @@ margin_bottom = 14.0
 text = "Bundle files:"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
-margin_top = 46.0
+margin_top = 74.0
 margin_right = 590.0
 margin_bottom = 336.0
 size_flags_horizontal = 3
@@ -158,12 +209,14 @@ size_flags_vertical = 3
 [node name="FileItemList" type="ItemList" parent="MarginContainer/VBoxContainer/VBoxContainer/ScrollContainer"]
 unique_name_in_owner = true
 margin_right = 590.0
-margin_bottom = 290.0
+margin_bottom = 262.0
 rect_min_size = Vector2( 500, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 auto_height = true
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Panel/HBoxContainer/DelButton" to="." method="_on_DelButton_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Panel/HBoxContainer/ExportButton" to="." method="_on_ExportButton_pressed"]
-[connection signal="text_changed" from="MarginContainer/VBoxContainer/VBoxContainer/NameHBoxContainer/FileNameLineEdit" to="." method="_on_LineEdit_text_changed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ToolPanel/HBoxContainer/DelButton" to="." method="_on_DelButton_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ToolPanel/HBoxContainer/ExportButton" to="." method="_on_ExportButton_pressed"]
+[connection signal="text_changed" from="MarginContainer/VBoxContainer/VBoxContainer/NameHBoxContainer/HBoxContainer/FileNameLineEdit" to="." method="_on_LineEdit_text_changed"]
+[connection signal="text_changed" from="MarginContainer/VBoxContainer/VBoxContainer/NameHBoxContainer/HBoxContainer/FileSuffixNameLineEdit" to="." method="_on_FileSuffixNameLineEdit_text_changed"]
+[connection signal="text_changed" from="MarginContainer/VBoxContainer/VBoxContainer/DistHBoxContainer/FileDistLineEdit" to="." method="_on_FileDistLineEdit_text_changed"]

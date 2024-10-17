@@ -15,6 +15,9 @@ onready var file_list_icon = $"%FileListIcon"
 onready var name_list_icon = $"%NameListIcon"
 onready var export_button = $"%ExportButton"
 onready var del_button = $"%DelButton"
+onready var tool_panel = $"%ToolPanel"
+onready var file_suffix_name_line_edit = $"%FileSuffixNameLineEdit"
+onready var file_dist_line_edit = $"%FileDistLineEdit"
 
 
 var focused = false
@@ -24,6 +27,9 @@ var uuid
 var section
 var types
 var export_pck_name = ""
+var export_pck_path = ""
+var export_pck_suffix = ""
+
 var files = []
 const SAVED_PATH = "user://export_bundles.cfg"
 
@@ -32,13 +38,19 @@ func _ready():
 	if !uuid:
 		uuid = UUID.v4()
 	section = "PackItem_%s" % uuid
-	
+	use_editor_theme()
 	config.set_value(section, "uuid", uuid);
 	name_list_icon.texture =  get_icon("File", "EditorIcons")
 	file_list_icon.texture = get_icon("ClassList", "EditorIcons")
 	
 	update()
 
+
+func use_editor_theme():
+	var bg = get_stylebox("Background", "EditorStyles")
+	add_stylebox_override("panel", bg)
+	var tool_bg = get_stylebox("SceneTabBG", "EditorStyles")
+	tool_panel.add_stylebox_override("panel", tool_bg)
 
 func update_files(p_files):
 	files = p_files
@@ -53,6 +65,10 @@ func update(p_files=null):
 	title_label.text = text if text else "PackItemNameHere"
 	file_name_line_edit.text = text
 	file_item_list.clear()
+	export_pck_path = config.get_value(section, "export_pck_path", "")
+	file_dist_line_edit.text = export_pck_path
+	export_pck_suffix = config.get_value(section, "export_pck_suffix", "")
+	file_suffix_name_line_edit.text = export_pck_suffix
 	
 	for file in files:
 		file_item_list.add_item(file, get_icon(types[file], "EditorIcons"))
@@ -123,3 +139,17 @@ func remove():
 func _on_DelButton_pressed():
 	remove()
 	emit_signal("removed", self)
+
+
+func _on_FileDistLineEdit_text_changed(value:String):
+	if OS.get_name()=="Windows":
+		value = value.replace("\\","/")
+	export_pck_path = value
+	config.set_value(section, "export_pck_path", value)
+	config.save(SAVED_PATH)
+
+
+func _on_FileSuffixNameLineEdit_text_changed(value):
+	export_pck_suffix = value
+	config.set_value(section, "export_pck_suffix", value)
+	config.save(SAVED_PATH)
