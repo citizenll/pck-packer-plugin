@@ -6,7 +6,7 @@ signal focused
 signal exported
 signal removed
 
-var UUID = preload("res://addons/pck_packer/uuid.gd")
+var UUID = preload("res://addons/pck-packer/uuid.gd")
 onready var border = $Border
 onready var title_label = $"%TitleLabel"
 onready var file_name_line_edit = $"%FileNameLineEdit"
@@ -18,6 +18,8 @@ onready var del_button = $"%DelButton"
 onready var tool_panel = $"%ToolPanel"
 onready var file_suffix_name_line_edit = $"%FileSuffixNameLineEdit"
 onready var file_dist_line_edit = $"%FileDistLineEdit"
+onready var dist_icon = $"%DistIcon"
+onready var files_count_label = $"%FilesCountLabel"
 
 
 var focused = false
@@ -42,7 +44,7 @@ func _ready():
 	config.set_value(section, "uuid", uuid);
 	name_list_icon.texture =  get_icon("File", "EditorIcons")
 	file_list_icon.texture = get_icon("ClassList", "EditorIcons")
-	
+	dist_icon.texture = get_icon("Folder", "EditorIcons")
 	update()
 
 
@@ -51,6 +53,7 @@ func use_editor_theme():
 	add_stylebox_override("panel", bg)
 	var tool_bg = get_stylebox("SceneTabBG", "EditorStyles")
 	tool_panel.add_stylebox_override("panel", tool_bg)
+
 
 func update_files(p_files):
 	files = p_files
@@ -72,7 +75,7 @@ func update(p_files=null):
 	
 	for file in files:
 		file_item_list.add_item(file, get_icon(types[file], "EditorIcons"))
-
+	files_count_label.text = str(files.size()) + " files"
 
 func _enter_tree():
 	set_process_input(true)

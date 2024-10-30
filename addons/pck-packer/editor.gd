@@ -1,6 +1,6 @@
 tool
 extends Control
-var PackItem = preload("res://addons/pck_packer/ui/pack_item.tscn")
+var PackItem = preload("res://addons/pck-packer/ui/pack_item.tscn")
 onready var pack_item_label = $"%PackItemLabel"
 onready var tree_container = $"%VBoxContainer"
 onready var tree_item_list = $"%TreeItemList"
@@ -14,6 +14,7 @@ var _path: String
 var bundles:ConfigFile = ConfigFile.new()
 const SAVED_PATH = "user://export_bundles.cfg"
 var file_types = {}
+var tree_item_map = {}
 
 func _ready():
 	if not plugin:
@@ -86,9 +87,21 @@ func fill_tree(p_dir:EditorFileSystemDirectory, p_item:TreeItem):
 		file.set_checked(0, false)
 		file.set_metadata(0, path)
 		checked = checked && file.is_checked(0)
+		tree_item_map[path] = file
 		used = true
 	p_item.set_checked(0, checked)
 	return used
+
+
+
+func _reload_check(loadsets):
+	var scrolled = false
+	for path in loadsets:
+		if path in tree_item_map:
+			tree_item_map[path].set_checked(0, true)
+			if not scrolled:
+				scrolled = true
+				include_files.scroll_to_item(tree_item_map[path])
 
 
 func _on_gui_visibility_changed():
@@ -157,11 +170,15 @@ func _hook_plugin(node: Node) -> void:
 
 
 func _pack_item_selected(item):
+	deselect_all()
+	presets.clear()
 	current_active_pack_item = item
 	pack_item_label.text = "当前正在编辑:%s" % item.export_pck_name
 	for child in tree_item_list.get_children():
 		if child == item:continue
 		child.unactive_style()
+	_reload_check(item.files)
+	presets.append_array(item.files)
 
 
 func _popup_confirm(content: String, target, callback: String) -> void:
@@ -249,10 +266,40 @@ func _on_New_pressed():
 	item.connect("actived", self, "_pack_item_selected")
 	item.connect("exported", self, "_export_pack_item")
 	item.connect("removed", self, "_remove_pack_item")
-
+	current_active_pack_item = item
+	presets.clear()
+	_tree_changed()
 	tree_item_list.add_child(item)
 	item.active()
 	bundles.save(SAVED_PATH)
+
+
+func deselect_all():
+	var item = include_files.get_root()
+	while item:
+		item.set_checked(0, false)
+		var pre_item = item
+		var path = item.get_metadata(0) as String;
+		if path.ends_with("/"):
+			_deselect_recursive(item)
+		item = item.get_next()
+	presets.clear()
+
+
+func _deselect_recursive(p_item):
+	var child = p_item.get_children()
+	while child:
+		child.set_checked(0, false)
+		var path = child.get_metadata(0) as String;
+		if path.ends_with("/"):
+			_deselect_recursive(child)
+		child = child.get_next()
+
+
+func load_state_from_pack():
+	if!current_active_pack_item:return
+	presets = current_active_pack_item.files
+	_tree_changed()
 
 
 func _export_pack_item(pack_item):
@@ -261,7 +308,7 @@ func _export_pack_item(pack_item):
 	var platform = check_preset(files)
 	var arguments = _get_arguments(platform, pack_item)
 	var output = []
-	var err = OS.execute(command, arguments, false , output)
+	var err = OS.execute(command, arguments, true , output)
 	var export_name = pack_item.export_pck_name
 	var export_path = pack_item.export_pck_path
 	var export_suffix = pack_item.export_pck_suffix
@@ -275,8 +322,8 @@ func _export_pack_item(pack_item):
 	var from = dist.plus_file("%s.%s" % [export_name, "pck"])
 	var to = dist_dir.plus_file("%s.%s" % [export_name, export_suffix])
 	var dir = Directory.new()
-	yield(get_tree().create_timer(5), "timeout")
 	dir.rename(from, to)
+
 
 func _remove_pack_item(pack_item):
 	tree_item_list.remove_child(pack_item)

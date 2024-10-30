@@ -4,7 +4,7 @@ extends EditorPlugin
 var plugin:EditorExportPlugin
 var editor:Control
 func _enter_tree():
-	var Editor = preload("res://addons/pck_packer/editor.tscn")
+	var Editor = preload("res://addons/pck-packer/editor.tscn")
 	editor = Editor.instance()
 	editor.plugin = self
 	add_control_to_bottom_panel(editor, "PckPacker")
